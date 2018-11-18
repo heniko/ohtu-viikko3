@@ -20,7 +20,7 @@ public class Stepdefs {
     List<String> inputLines = new ArrayList<>();
     
     @Given("^user \"([^\"]*)\" with password \"([^\"]*)\" is created$")
-    public void can_login_on_succesfully_created_account(String password, String username) throws Throwable {
+    public void can_login_on_succesfully_created_account(String username, String password) throws Throwable {
         inputLines.add("new");
         inputLines.add(username);
         inputLines.add(password);

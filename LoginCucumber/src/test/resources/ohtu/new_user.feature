@@ -29,4 +29,4 @@ Feature: A new user account can be created if a proper unused username and passw
         Given user "eero" with password "salasana2" is created
         And   command login is selected
         When  username "eero" and password "salasana2" are entered
-        Then  system will respond with "wrong username or password"
+        Then  system will respond with "logged in"
