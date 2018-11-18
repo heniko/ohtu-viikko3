@@ -39,7 +39,7 @@ public class Submission {
         this.hours = hours;
     }
 
-    private String exercisesDone() {
+    public String exercisesDone() {
         String s = "";
         for (int i = 0; i < exercises.length - 1; i++) {
             s = s + exercises[i] + ", ";

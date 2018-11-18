@@ -20,19 +20,24 @@ public class Main {
         Gson mapper = new Gson();
         Submission[] subs = mapper.fromJson(bodyText, Submission[].class);
 
-        System.out.println("opiskelijanumero " + studentNr);
-        System.out.println("");
-        for (Submission submission : subs) {
-            System.out.println(submission);
+        // Getting courses data
+        String coursesURL = "https://studies.cs.helsinki.fi/courses/courseinfo";
+
+        String coursesBodyText = Request.Get(coursesURL).execute().returnContent().asString();
+        Course[] courses = mapper.fromJson(coursesBodyText, Course[].class);
+
+        for (Course course : courses) {
+            course.initSubs();
+            for (Submission sub : subs) {
+                if (sub.getCourse().equals(course.getName())) {
+                    course.addSubmission(sub);
+                }
+            }
         }
 
-        int ttlUsedTime = 0;
-        int ttlExersisesDone = 0;
-        for (int i = 0; i < subs.length; i++) {
-            ttlUsedTime += subs[i].getHours();
-            ttlExersisesDone += subs[i].getExercises().length;
+        System.out.println("opiskelijanumero " + studentNr + "\n");
+        for (Course c : courses) {
+            System.out.println(c.toString());
         }
-        System.out.println("");
-        System.out.println("yhteensä: " + ttlExersisesDone + " tehtävää " + ttlUsedTime + " tuntia");
     }
 }
