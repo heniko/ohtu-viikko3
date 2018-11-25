@@ -41,4 +41,17 @@ public class KassapaateTest {
         verify(kortti, times(0)).osta(anyInt());
     }
       
+    @Test
+    public void kortilleLisaysToimiiPositiivisella() {
+        kassa.lataa(kortti, 10);
+        
+        verify(kortti, times(1)).lataa(anyInt());
+    }
+    
+    @Test
+    public void kortilleEiPystyLisaamaanNegatiivistaMaaraa() {
+        kassa.lataa(kortti, -10);
+        
+        verify(kortti, times(0)).lataa(anyInt());
+    }
 }
